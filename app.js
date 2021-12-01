@@ -212,3 +212,9 @@
 //   ScoreContainer.innerHTML = `<h2>Percentage of Correctly Answered Questions: ${scorePercentage}</h2>`;
 //   ScoreContainer.innerHTML += `<h2>Number of Correctly Answered Questions: ${score}</h2>`;
 // }
+
+// fortune favors the bold
+
+/*
+my code below
+*/
