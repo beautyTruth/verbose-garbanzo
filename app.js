@@ -348,8 +348,8 @@ start.addEventListener("click", startQuiz);
 
 // answer choices event listeners
 
-allAnswerChoices.forEach((clickAnswer) => {
-  clickAnswer.addEventListener("click", (e) => {
+allAnswerChoices.forEach(function (clickAnswer) {
+  clickAnswer.addEventListener("click", function (e) {
     let userAnswer = e.target.innerText;
     checkAnswer(userAnswer);
   });
@@ -384,7 +384,7 @@ function startQuiz() {
 function renderProgress() {
   for (let questionIndex = 0; questionIndex <= lastQuestion; questionIndex++) {
     progressContainer.innerHTML +=
-      "<div class='progress-box' id=' + questionIndex +'></div>";
+      "<div class='progress-box' id=" + questionIndex + "></div>";
   }
 }
 
@@ -418,6 +418,7 @@ function checkAnswer(answer) {
 function answerIsCorrect() {
   document.getElementById(activeQuestion).style.backgroundColor = "green";
 }
+
 // answer is incorrect function
 
 function answerIsIncorrect() {
@@ -434,4 +435,12 @@ function nextQuestion() {
     clearInterval(TIMER);
     renderScore();
   }
+}
+
+// renderScore Function
+function renderScore() {
+  ScoreContainer.style.visibility = "visible";
+  let scorePercentage = Math.round((100 * score) / questions.length);
+  ScoreContainer.innerHTML = `<h2>Percentage of Correctly Answered Questions: ${scorePercentage}</h2>`;
+  ScoreContainer.innerHTML += `<h2>Number of Correctly Answered Questions: ${score}</h2>`;
 }
