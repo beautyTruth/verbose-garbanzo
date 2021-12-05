@@ -345,6 +345,15 @@ let TIMER;
 
 start.addEventListener("click", startQuiz);
 
+// answer choices event listeners
+
+allAnswerChoices.forEach((clikyAnswer) => {
+  clikyAnswer.addEventListener("click", (e) => {
+    let userAnswer = e.target.innerText;
+    checkAnswer(userAnswer);
+  });
+});
+
 // renderQuestion function
 function renderQuestion() {
   let q = questions[activeQuestion];
@@ -387,5 +396,13 @@ function renderCounter() {
     count++;
   } else {
     count = 0;
+  }
+}
+
+// checkAnswer function
+
+function checkAnswer(answer) {
+  if() {
+    
   }
 }
