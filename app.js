@@ -355,13 +355,6 @@ allAnswerChoices.forEach((clickAnswer) => {
   });
 });
 
-// allAnswerChoices.forEach(function (clickAnswer) {
-//   clickAnswer.addEventListener("click", function (e) {
-//     let userAnswer = e.target.innerText;
-//     checkAnswer(userAnswer);
-//   });
-// });
-
 // renderQuestion function
 function renderQuestion() {
   let q = questions[activeQuestion];
@@ -403,7 +396,8 @@ function renderCounter() {
     timeGauge.style.width = count * gaugeUnit + "px";
     count++;
   } else {
-    count = 0;
+    answerIsIncorrect();
+    nextQuestion();
   }
 }
 
@@ -416,6 +410,7 @@ function checkAnswer(answer) {
   } else {
     answerIsIncorrect();
   }
+  nextQuestion();
 }
 
 // answer is correct function
@@ -427,4 +422,16 @@ function answerIsCorrect() {
 
 function answerIsIncorrect() {
   document.getElementById(activeQuestion).style.backgroundColor = "red";
+}
+
+// next question function
+function nextQuestion() {
+  count = 0;
+  if (activeQuestion < lastQuestion) {
+    activeQuestion++;
+    renderQuestion();
+  } else {
+    clearInterval(TIMER);
+    renderScore();
+  }
 }
