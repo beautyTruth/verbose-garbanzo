@@ -230,7 +230,7 @@ const answerChoiceC = document.querySelector("#C");
 const answerChoiceD = document.querySelector("#D");
 
 const counter = document.querySelector(".counter");
-const timeGauge = document.querySelector(".timeGauge");
+const timeGauge = document.querySelector(".time-gauge");
 const progressContainer = document.querySelector(".progress-container");
 const ScoreContainer = document.querySelector(".score-container");
 
@@ -335,12 +335,15 @@ let questions = [
 
 const lastQuestion = questions.length - 1;
 let activeQuestion = 0;
-let count = 0;
-
 const questionTime = 10; // ten seconds
 const gaugeWidth = 800; // 800 pixels or 80rem
 const gaugeUnit = gaugeWidth / questionTime; // by 80 pixels
+let count = 0;
 let TIMER;
+
+// the start button event listener
+
+start.addEventListener("click", startQuiz);
 
 // renderQuestion function
 function renderQuestion() {
@@ -355,13 +358,16 @@ function renderQuestion() {
   document.body.style.backgroundImage = bodyImg;
 }
 
-start.style.display = "none";
+// startQuiz function
 
-renderQuestion();
-
-quiz.style.visibility = "visible";
-
-renderProgress();
+function startQuiz() {
+  start.style.display = "none";
+  renderQuestion();
+  quiz.style.visibility = "visible";
+  renderProgress();
+  renderCounter();
+  TIMER = setInterval(renderCounter, 1000);
+}
 
 // renderProgress function
 
@@ -369,5 +375,17 @@ function renderProgress() {
   for (let questionIndex = 0; questionIndex <= lastQuestion; questionIndex++) {
     progressContainer.innerHTML +=
       "<div class='progress-box' id=' + questionIndex +'></div>";
+  }
+}
+
+// renderCounter function
+
+function renderCounter() {
+  if (count <= questionTime) {
+    counter.innerHTML = count;
+    timeGauge.style.width = count * gaugeUnit + "px";
+    count++;
+  } else {
+    count = 0;
   }
 }
