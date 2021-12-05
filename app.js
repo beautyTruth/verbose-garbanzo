@@ -340,6 +340,7 @@ const gaugeWidth = 800; // 800 pixels or 80rem
 const gaugeUnit = gaugeWidth / questionTime; // by 80 pixels
 let count = 0;
 let TIMER;
+let score = 0;
 
 // the start button event listener
 
@@ -347,12 +348,19 @@ start.addEventListener("click", startQuiz);
 
 // answer choices event listeners
 
-allAnswerChoices.forEach((clikyAnswer) => {
-  clikyAnswer.addEventListener("click", (e) => {
+allAnswerChoices.forEach((clickAnswer) => {
+  clickAnswer.addEventListener("click", (e) => {
     let userAnswer = e.target.innerText;
     checkAnswer(userAnswer);
   });
 });
+
+// allAnswerChoices.forEach(function (clickAnswer) {
+//   clickAnswer.addEventListener("click", function (e) {
+//     let userAnswer = e.target.innerText;
+//     checkAnswer(userAnswer);
+//   });
+// });
 
 // renderQuestion function
 function renderQuestion() {
@@ -402,7 +410,21 @@ function renderCounter() {
 // checkAnswer function
 
 function checkAnswer(answer) {
-  if() {
-    
+  if (answer === questions[activeQuestion].correctAnswer) {
+    score++;
+    answerIsCorrect();
+  } else {
+    answerIsIncorrect();
   }
+}
+
+// answer is correct function
+
+function answerIsCorrect() {
+  document.getElementById(activeQuestion).style.backgroundColor = "green";
+}
+// answer is incorrect function
+
+function answerIsIncorrect() {
+  document.getElementById(activeQuestion).style.backgroundColor = "red";
 }
